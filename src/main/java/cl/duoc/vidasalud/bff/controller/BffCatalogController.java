@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import cl.duoc.vidasalud.bff.client.CatalogClient;
@@ -45,6 +46,7 @@ public class BffCatalogController {
         );
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/services")
     public ResponseEntity<HealthServiceResponse>
         createService(
@@ -65,6 +67,7 @@ public class BffCatalogController {
             .body(created);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/services/{id}")
     public ResponseEntity<HealthServiceResponse>
         updateService(
@@ -81,6 +84,7 @@ public class BffCatalogController {
         );
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/services/{id}")
     public ResponseEntity<Void>
         deleteService(
@@ -114,6 +118,7 @@ public ResponseEntity<ClinicalBoxResponse>
     );
 }
 
+@PreAuthorize("hasAnyRole('ADMIN')")
 @PostMapping("/boxes")
 public ResponseEntity<ClinicalBoxResponse>
         createBox(
@@ -133,6 +138,7 @@ public ResponseEntity<ClinicalBoxResponse>
         .body(created);
 }
 
+@PreAuthorize("hasAnyRole('ADMIN')")
 @PutMapping("/boxes/{id}")
 public ResponseEntity<ClinicalBoxResponse>
         updateBox(
@@ -145,6 +151,7 @@ public ResponseEntity<ClinicalBoxResponse>
     );
 }
 
+@PreAuthorize("hasAnyRole('ADMIN')")
 @DeleteMapping("/boxes/{id}")
 public ResponseEntity<Void>
         deleteBox(
@@ -177,6 +184,7 @@ public ResponseEntity<SlotResponse>
     );
 }
 
+@PreAuthorize("hasAnyRole('ADMIN')")
 @PostMapping("/slots")
 public ResponseEntity<SlotResponse>
         createSlot(
@@ -196,6 +204,7 @@ public ResponseEntity<SlotResponse>
         .body(created);
 }
 
+@PreAuthorize("hasAnyRole('ADMIN')")
 @PutMapping("/slots/{id}")
 public ResponseEntity<SlotResponse>
         updateSlot(
@@ -208,6 +217,7 @@ public ResponseEntity<SlotResponse>
     );
 }
 
+@PreAuthorize("hasAnyRole('ADMIN','RECEPCIONISTA')")
 @PutMapping("/slots/{id}/reserve")
 public ResponseEntity<SlotResponse>
         reserveSlot(
@@ -219,6 +229,7 @@ public ResponseEntity<SlotResponse>
     );
 }
 
+@PreAuthorize("hasAnyRole('ADMIN','RECEPCIONISTA')")
 @PutMapping("/slots/{id}/release")
 public ResponseEntity<SlotResponse>
         releaseSlot(
@@ -230,6 +241,7 @@ public ResponseEntity<SlotResponse>
     );
 }
 
+@PreAuthorize("hasAnyRole('ADMIN')")
 @DeleteMapping("/slots/{id}")
 public ResponseEntity<Void>
         deleteSlot(
